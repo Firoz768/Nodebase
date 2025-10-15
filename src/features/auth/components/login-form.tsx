@@ -1,5 +1,4 @@
 "use client";
-import React from 'react'
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from 'next/image';
@@ -28,7 +27,7 @@ import {
 } from "@/components/ui/form";
 
 import { Input } from '@/components/ui/input';
-import {authClient} from "@/lib/auth-client";
+import { authClient } from "@/lib/auth-client";
 
 
 const loginSchema = z.object({
@@ -51,18 +50,18 @@ export function LoginForm() {
 
 
     const onSubmit = async (values: LoginFormValues) => {
-       await authClient.signIn.email({
-        email :  values.email,
-        password : values.password,
-        callbackURL:"/",
-       },{
-        onSuccess : () => {
-            router.push("/");
-        },
-        onError : (ctx) =>{
-            toast.error(ctx.error.message);
-        },
-       });
+        await authClient.signIn.email({
+            email: values.email,
+            password: values.password,
+            callbackURL: "/",
+        }, {
+            onSuccess: () => {
+                router.push("/");
+            },
+            onError: (ctx) => {
+                toast.error(ctx.error.message);
+            },
+        });
     }
 
     const isPending = form.formState.isSubmitting;
@@ -85,54 +84,56 @@ export function LoginForm() {
                             <div className='grid gap-6 ' >
                                 <div className='flex flex-col gap-4' >
                                     <Button variant="outline" className="w-full" type="button" disabled={isPending}>
+                                        <Image src="/logos/github.svg" width={20} height={20} alt="github-logo" />
                                         Continue With Github
                                     </Button>
                                     <Button variant="outline" className="w-full" type="button" disabled={isPending}>
-                                        Continue With Google    
+                                        <Image src="/logos/google.svg" width={20} height={20} alt="google-logo"  />
+                                        Continue With Google
                                     </Button>
                                 </div>
 
                                 <div className='grid gap-6' >
-                                      <FormField
+                                    <FormField
                                         control={form.control}
                                         name='email'
-                                        render={({field})=>(
-                                        <FormItem>
-                                            <FormLabel>Email</FormLabel>
-                                            <FormControl>
-                                                <Input type="email" placeholder='example@gmail.com' {...field} />
-                                            </FormControl>
-                                            <FormMessage/>
-                                        </FormItem>
-                                    )}
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel>Email</FormLabel>
+                                                <FormControl>
+                                                    <Input type="email" placeholder='example@gmail.com' {...field} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
                                     />
-                                      <FormField
+                                    <FormField
                                         control={form.control}
                                         name='password'
-                                        render={({field})=>(
-                                        <FormItem>
-                                            <FormLabel>Password</FormLabel>
-                                            <FormControl>
-                                                <Input type="password" placeholder='********' {...field} />
-                                            </FormControl>
-                                            <FormMessage/>
-                                        </FormItem>
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel>Password</FormLabel>
+                                                <FormControl>
+                                                    <Input type="password" placeholder='********' {...field} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
 
-                                    )}
+                                        )}
                                     />
-                                        <Button type="submit" className='w-full' disabled={isPending} >
+                                    <Button type="submit" className='w-full' disabled={isPending} >
                                         Login
-                                        </Button>
+                                    </Button>
                                 </div>
 
                                 <div className='text-center text-sm' >
-                                        Don't have an account?{" "}
+                                    Don't have an account?{" "}
 
-                                        <Link href="/register"  className=' underline underline-offset-4'>
+                                    <Link href="/register" className=' underline underline-offset-4'>
                                         Sign up
-                                        </Link>
+                                    </Link>
                                 </div>
-                                
+
                             </div>
                         </form>
                     </Form>
