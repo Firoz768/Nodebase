@@ -8,7 +8,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode; }) =>{
                 <Link href="/" className="flex items-center gap-2 self-center font-medium" >
                     <Image
                         src="/logos/logo.svg"
-                        alt="Nodepilot"
+                        alt="NodePilot"
                         width={30}
                         height={30}
                     />
